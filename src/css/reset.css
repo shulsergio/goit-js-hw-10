@@ -1,35 +1,52 @@
-/* Reset styles */
+/* Стилі для обнулення відступів у елементів */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6,
-p {
-  margin: 0;
-}
-
-p:last-child {
-  margin-bottom: 0;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
+input,
+label,
 a {
-  color: currentColor;
+  margin: 0;
+}
+
+p {
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+
+/* обнулення базових властивостей списків (ul) */
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+/* обнулення базових властивостей у посилань */
+a {
   text-decoration: none;
 }
 
-button {
-  cursor: pointer;
-}
-
+/* Властивості для коректного відображення картинок */
 img {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Властивості для обнулення курсиву address */
+address {
+  font-style: normal;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
 }
