@@ -47,6 +47,8 @@ address {
 }
 
 input:focus,
-textarea:focus {
+input:active,
+textarea:focus,
+textarea:active {
   outline: none;
 }
