@@ -74,21 +74,3 @@ function onTimer(futureDate) {
     '0'
   );
 }
-
-// const finalData = new Date(2024, 6, 14, 22, 0, 0);
-// function onTimer() {
-//   const currentData = new Date();
-//   let day = 1000 * 60 * 60 * 24;
-//   let hour = 1000 * 60 * 60;
-//   let minutes = 1000 * 60;
-//   let xx = finalData - currentData;
-//   let diffDay = Math.floor(xx / day);
-//   let difHour = Math.floor((xx % day) / hour);
-//   let difMin = Math.floor(((xx % day) % hour) / minutes);
-//   let difSec = Math.floor((((xx % day) % hour) % minutes) / 1000);
-//   return `days- ${diffDay}, hours- ${difHour}, min- ${difMin}, sec- ${difSec}`;
-// }
-
-// const id = setInterval(() => {
-//     console.log(onTimer());
-// }, 1000);
