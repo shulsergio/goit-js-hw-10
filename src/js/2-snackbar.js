@@ -13,7 +13,7 @@ const dataLoadIzi = [
   {
     title: '',
     icon: '❌',
-    message: 'Fulfilled promise in ',
+    message: 'Rejected promise in ',
     backgroundColor: '#ef4040',
   },
   {
