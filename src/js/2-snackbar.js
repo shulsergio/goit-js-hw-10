@@ -2,19 +2,28 @@
 import iziToast from 'izitoast';
 // Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
-
-iziToast.info({
-  backgroundColor: '#09f',
-  title: 'Hello',
-  titleColor: '#fff',
-  titleSize: '16px',
-  message: 'Welcome!',
-  messageColor: '#fff',
-  messageSize: '16px',
-  theme: 'light',
-  position: 'topRight',
-  iconColor: '#fff',
-});
+const dataLoadIzi = [
+  {
+    title: 'Hello',
+    icon: '',
+    iconColor: '#fff',
+    message: 'Welcome!',
+    backgroundColor: '#09f',
+  },
+  {
+    title: '',
+    icon: '❌',
+    message: 'Fulfilled promise in ',
+    backgroundColor: '#ef4040',
+  },
+  {
+    title: '',
+    icon: '✅',
+    message: 'Fulfilled promise in ',
+    backgroundColor: '#59a10d',
+  },
+];
+onLoadIzi(dataLoadIzi[0]);
 const dataInput = document.querySelector('input[type="number"]');
 const btnSubmit = document.querySelector('.btn-sbm');
 btnSubmit.addEventListener('click', onClickBtn);
@@ -31,27 +40,25 @@ function onClickBtn(evt) {
   });
   mypromise
     .then(delay => {
-      iziToast.success({
-        title: 'OK',
-        message: `Fulfilled promise in ${delay}ms`,
-        messageSize: '16px',
-        color: '#59a10d',
-        messageColor: '#fff',
-        titleColor: '#fff',
-        iconColor: '#fff',
-        position: 'topRight',
-      });
+      onLoadIzi(dataLoadIzi[2], delay);
     })
     .catch(delay => {
-      iziToast.error({
-        title: 'Error',
-        message: `Rejected promise in ${delay}ms`,
-        messageSize: '16px',
-        color: '#ef4040',
-        messageColor: '#fff',
-        titleColor: '#fff',
-        iconColor: '#fff',
-        position: 'topRight',
-      });
+      onLoadIzi(dataLoadIzi[1], delay);
     });
+}
+
+function onLoadIzi(data, delay = 0) {
+  let newMessage = delay
+    ? data.icon + ' ' + data.message + delay + 'ms'
+    : data.message;
+  iziToast.show({
+    backgroundColor: data.backgroundColor,
+    title: data.title,
+    titleColor: '#fff',
+    titleSize: '16px',
+    message: newMessage,
+    messageColor: '#fff',
+    messageSize: '16px',
+    position: 'topRight',
+  });
 }
