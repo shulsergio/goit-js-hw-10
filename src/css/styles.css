@@ -178,7 +178,7 @@ border-radius: 4px;
   height: 48px;
   margin: 10px 0 24px 0;
 }
-fieldset:hover{
+fieldset input:hover{
     border: 1px solid #000;
 }
 fieldset label{

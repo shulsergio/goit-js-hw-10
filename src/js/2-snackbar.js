@@ -22,6 +22,12 @@ const dataLoadIzi = [
     message: 'Fulfilled promise in ',
     backgroundColor: '#59a10d',
   },
+  {
+    title: 'Caution',
+    icon: '',
+    message: 'You forgot important data',
+    backgroundColor: '#ffa000',
+  },
 ];
 onLoadIzi(dataLoadIzi[0]);
 const dataInput = document.querySelector('input[type="number"]');
@@ -32,6 +38,10 @@ function onClickBtn(evt) {
   evt.preventDefault();
   let radio = document.querySelector('input[name="state"]:checked').value;
   let delay = parseInt(dataInput.value);
+  if (isNaN(delay) || delay < 0) {
+    onLoadIzi(dataLoadIzi[3]);
+    return;
+  }
 
   const mypromise = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -47,10 +57,9 @@ function onClickBtn(evt) {
     });
 }
 
-function onLoadIzi(data, delay = 0) {
-  let newMessage = delay
-    ? data.icon + ' ' + data.message + delay + 'ms'
-    : data.message;
+function onLoadIzi(data, delay = -1) {
+  let newMessage =
+    delay >= 0 ? data.icon + ' ' + data.message + delay + 'ms' : data.message;
   iziToast.show({
     backgroundColor: data.backgroundColor,
     title: data.title,
