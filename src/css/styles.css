@@ -96,6 +96,26 @@ border: 1px solid #808080;
 color: #808080;
       cursor: not-allowed;
 }
+#datetime-picker {
+  margin-top: 32px;
+  background: #fff;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  width: 272px;
+  height: 20px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+  padding: 8px 16px;
+}
+#datetime-picker:disabled {
+  background: #fafafa;
+  border: 1px solid #808080;
+  color: #808080;
+  cursor: not-allowed;
+}
 
 button{
   background: #4e75ff;

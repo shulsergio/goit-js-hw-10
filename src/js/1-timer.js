@@ -7,6 +7,9 @@ import iziToast from 'izitoast';
 // Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
 const btnStart = document.querySelector('[data-start]');
+const myInput = document.querySelector('#datetime-picker');
+const timerHTML = document.querySelector('.timer');
+let timerFromUser = 0;
 let fp = '';
 let setTimerId = 0;
 const options = {
@@ -15,46 +18,42 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    timer(selectedDates[0]);
+    console.log('selectedDates[0]- ', selectedDates[0]);
+    if (selectedDates[0] < options.defaultDate) {
+      iziToast.error({
+        title: 'Error',
+        message: 'Please choose a date in the future',
+        color: '#ef4040',
+        messageColor: '#fff',
+        titleColor: '#fff',
+        iconColor: '#fff',
+        position: 'topRight',
+      });
+      btnStart.setAttribute('disabled', 'true');
+    } else {
+      timerFromUser = selectedDates[0];
+      btnStart.removeAttribute('disabled');
+    }
   },
 };
+fp = flatpickr(myInput, options);
 
-const myInput = document.querySelector('#datetime-picker');
-const timerHTML = document.querySelector('.timer');
-flatpickr(myInput, options);
-console.log(fp);
-// timer(fp);
+btnStart.addEventListener('click', () => {
+  myInput.disabled = true;
+  btnStart.setAttribute('disabled', 'true');
 
-function timer(dateFromTimer) {
-  const currentData = new Date();
-  if (currentData > dateFromTimer) {
-    iziToast.error({
-      title: 'Error',
-      message: 'Please choose a date in the future',
-      color: '#ef4040',
-      messageColor: '#fff',
-      titleColor: '#fff',
-      iconColor: '#fff',
-      position: 'topRight',
-    });
-    return;
-  } else {
-    btnStart.removeAttribute('disabled');
-    btnStart.addEventListener('click', () => {
-      btnStart.setAttribute('disabled', 'true');
-      clearInterval(setTimerId);
+  setTimerId = setInterval(() => {
+    onTimer(timerFromUser);
+  }, 1000);
+});
 
-      setTimerId = setInterval(() => {
-        onTimer(dateFromTimer);
-      }, 1000);
-    });
-  }
-}
 function onTimer(futureDate) {
   const currentData = new Date();
   let xx = futureDate - currentData;
-  if (xx <= 0) {
+  if (xx < 1) {
+    myInput.disabled = false;
     clearInterval(setTimerId);
+    return;
   }
   let day = 1000 * 60 * 60 * 24;
   let hour = 1000 * 60 * 60;
